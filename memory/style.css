@@ -1,0 +1,65 @@
+header {
+  font-family: "Lucida Sans";
+  background-color: azure;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+  margin-top: 2em;
+}
+
+main {
+  background-color: azure;
+  height: 700px;
+  width: 90%;
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  margin: 3em auto;
+  padding: 20px;
+}
+
+.card {
+  height: 200px;
+  width: 100px;
+  border-radius: 10px;
+  box-shadow: -1px -1px 1px black, 1px 1px 1px black;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+#restart-game {
+  margin: auto;
+  text-align: center;
+  margin: 0px;
+}
+
+#restart-game a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  border: 1px solid black;
+  letter-spacing: 2px;
+  padding: 8px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .card {
+    font-size: 1rem;
+  }
+}
