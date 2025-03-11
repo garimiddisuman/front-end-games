@@ -69,7 +69,9 @@ const checkGameStatus = (moveDetails) => {
   if (moveCount === 9) displaydrawMessage();
 };
 
-const attachClickHandlers = (boxes) => {
+const runGame = () => {
+  const boxes = [...document.querySelectorAll(".box")];
+
   const moveHandler = handleMove();
 
   boxes.forEach((box, index) => {
@@ -79,12 +81,6 @@ const attachClickHandlers = (boxes) => {
       checkGameStatus({ ...moveDetails, boxes });
     };
   });
-};
-
-const runGame = () => {
-  const boxes = [...document.querySelectorAll(".box")];
-
-  attachClickHandlers(boxes);
 };
 
 runGame();
