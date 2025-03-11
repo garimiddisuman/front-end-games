@@ -36,9 +36,8 @@ const displaydrawMessage = () => {
 
 const hasWinnerFound = (currentPlayer) => {
   const winningCombinations = getWinningCombinations();
-  return winningCombinations.some((set) =>
-    [...set].every((num) => currentPlayer.has(num))
-  );
+
+  return winningCombinations.some((set) => set.isSubsetOf(currentPlayer));
 };
 
 const handleMove = () => {
