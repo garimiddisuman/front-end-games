@@ -1,11 +1,10 @@
 class Sliding {
   #solutionBoard;
-  #currentState;
 
   constructor(playerName) {
     this.playerName = playerName;
-    this.#currentState = this.shuffleBoard();
     this.#solutionBoard = ["1", "2", "3", "4", "5", "6", "7", "8", " "];
+    this.currentState = this.shuffleBoard();
   }
 
   shuffleBoard() {
@@ -13,7 +12,7 @@ class Sliding {
   }
 
   isSolved() {
-    return this.#currentState.toString() === this.#solutionBoard.toString();
+    return this.currentState.toString() === this.#solutionBoard.toString();
   }
 
   static isExitCommand(command) {
@@ -21,7 +20,7 @@ class Sliding {
   }
 
   #swapTiles(tile1, tile2) {
-    const swapped = [...this.#currentState];
+    const swapped = [...this.currentState];
     [swapped[tile1], swapped[tile2]] = [swapped[tile2], swapped[tile1]];
 
     return swapped;
@@ -37,29 +36,35 @@ class Sliding {
   }
 
   moveTile(direction) {
-    const empTileIdx = this.#currentState.indexOf(" ");
-    const newTileIdx = this.#getNewTileIndex(empTileIdx, direction);
-    this.#currentState = this.#swapTiles(empTileIdx, newTileIdx);
+    const emptyTileIndex = this.currentState.indexOf(" ");
+    const newTileIndex = this.#getNewTileIndex(emptyTileIndex, direction);
+
+    if (emptyTileIndex !== newTileIndex) {
+      this.currentState = this.#swapTiles(emptyTileIndex, newTileIndex);
+    }
+
+    return this.currentState;
   }
 }
 
-const playGame = (player) => {
-  while (!player.isSolved()) {
+const playGame = (gameInstance) => {
+  while (!gameInstance.isSolved()) {
+    console.log(gameInstance);
+    console.log(gameInstance.currentState);
+
     const playerMove = prompt("Enter direction (w/a/s/d) or 'e' to exit:");
 
-    if (Sliding.isExitCommand(playerMove)) {
-      return false;
-    }
+    if (Sliding.isExitCommand(playerMove)) return false;
 
-    player.moveTile(playerMove);
+    gameInstance.currentState = gameInstance.moveTile(playerMove);
   }
 
   return true;
 };
 
 const startGame = () => {
-  const player = new Sliding("Suman");
-  const result = playGame(player);
+  const gameInstance = new Sliding("Suman");
+  const result = playGame(gameInstance);
 
   console.log(result ? "Win!" : "Lose!");
 };
