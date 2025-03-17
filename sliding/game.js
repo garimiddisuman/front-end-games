@@ -49,10 +49,10 @@ class Sliding {
 
 const playGame = (gameInstance) => {
   while (!gameInstance.isSolved()) {
-    console.log(gameInstance);
     console.log(gameInstance.currentState);
 
     const playerMove = prompt("Enter direction (w/a/s/d) or 'e' to exit:");
+    console.clear();
 
     if (Sliding.isExitCommand(playerMove)) return false;
 
